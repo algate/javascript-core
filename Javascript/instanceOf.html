@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<script>
+    // 实现一个 instanceOf
+    // instanceOf 的内部机制是通过判断对象的原型链中是不是能找到该类型的 prototype
+    function instanceOf(left, right) {
+        let proto = left.__proto__;
+        let prototype = right.prototype;
+        while (true) {
+            if (proto === null) return false;
+            if (proto === prototype) return true;
+            proto = proto.__proto__;
+        }
+    }
+</script>

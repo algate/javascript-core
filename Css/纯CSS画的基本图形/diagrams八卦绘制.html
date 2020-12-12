@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css绘制八卦图</title>
+	<style type="text/css">
+	*{margin:0;padding:0;}
+	li{
+		list-style: none;
+	}
+	ul li{
+		float:left;margin:20px;
+	}
+		#diagrams{
+			width:192px;height:96px;
+			border-width:4px 4px 100px 4px;
+			border-style: solid;
+			border-color:black;
+			background:white;
+			border-radius: 50%;
+			position:relative;
+		}
+		#diagrams:before{
+			width:16px;height:16px;
+			content:"";
+			position:absolute;
+			top:50%;
+			left:0;
+			background:white;
+			border:40px solid black;
+			border-radius:50%;
+		}
+		#diagrams:after{
+			width:16px;height:16px;
+			content:"";
+			position:absolute;
+			top:50%;
+			left:50%;
+			background:black;
+			border:40px solid white;
+			border-radius:50%;
+		}
+	</style>
+</head>
+<body>
+	<!-- <div id="diagrams">八卦图</div> -->
+	<ul>
+		<li id="diagrams"></li>
+		<li id="diagrams"></li>
+		<li id="diagrams"></li>
+		<li id="diagrams"></li>
+		<li id="diagrams"></li>
+	</ul>
+</body>
+</html>

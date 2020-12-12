@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    div {
+        margin: 5px;
+    }
+
+    #heart {
+        position: relative;
+        width: 10px;
+        height: 9px;
+    }
+
+    #heart:before,
+    #heart:after {
+        position: absolute;
+        content: "";
+        left: 10px;
+        top: 0;
+        width: 10px;
+        height: 16px;
+        background: red;
+        -moz-border-radius: 10px 10px 0 0;
+        border-radius: 10px 10px 0 0;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        -webkit-transform-origin: 0 100%;
+        -moz-transform-origin: 0 100%;
+        -ms-transform-origin: 0 100%;
+        -o-transform-origin: 0 100%;
+        transform-origin: 0 100%;
+    }
+
+    #heart:after {
+        left: 0;
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+        -webkit-transform-origin: 100% 100%;
+        -moz-transform-origin: 100% 100%;
+        -ms-transform-origin: 100% 100%;
+        -o-transform-origin: 100% 100%;
+        transform-origin: 100% 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="heart">20、爱心</div>
+    <div id="infinity">21、无穷大符号</div>
+    <div id="egg">22、鸡蛋</div>
+    <div id="pacman">23、食逗人（Pac</div>
+    <div id="talkbubble">24、提示对话框</div>
+    <div id="burst-12">25、12角星</div>
+    <div id="burst-8">26、8角星</div>
+    <div id="cut-diamond">27、钻石</div>
+    <div id="yin-yang">28、阴阳八卦（霸气的这个）</div>
+    <div id="diagrams">88、八卦制作</div>
+</body>
+
+</html>

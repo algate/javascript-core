@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>变形-按钮旋转缩放</title>
+	<style type="text/css">
+	*{padding:0; margin:0;}
+	ul,li{ list-style:none;}
+	ul li{ float:left; width:64px; height:64px; margin:10px ;}
+	.list1,.list2{ height:84px; margin-top:20px;}
+	.list1 img,.list2 img{cursor:pointer;
+		-webkit-transition:all 0.8s ease-in-out;
+		   -moz-transition:all 0.8s ease-in-out;
+		    -ms-transition:all 0.8s ease-in-out;
+		     -o-transition:all 0.8s ease-in-out;
+		        transition:all 0.8s ease-in-out;
+	}
+	.list1 img:hover{
+		-webkit-transform:rotate(360deg) scale(1.5);
+		   -moz-transform:rotate(360deg) scale(1.5);
+		    -ms-transform:rotate(360deg) scale(1.5);
+		     -o-transform:rotate(360deg) scale(1.5);
+		        transform:rotate(360deg) scale(1.5);
+	}
+	.list2 img:hover{
+		-webkit-transform:rotate(-360deg) scale(.7);
+		   -moz-transform:rotate(-360deg) scale(.7);
+		    -ms-transform:rotate(-360deg) scale(.7);
+		     -o-transform:rotate(-360deg) scale(.7);
+		        transform:rotate(-360deg) scale(.7);
+	}
+	</style>
+</head>
+<body>
+	<ul class="list1">
+		<li><img src="images/delicious.png" /></li>
+		<li><img src="images/facebook.png" /></li>
+		<li><img src="images/rss.png" /></li>
+		<li><img src="images/twitter.png" /></li>
+		<li><img src="images/yahoo.png" /></li>
+	</ul>
+
+	<ul class="list2">
+		<li><img src="images/delicious.png" /></li>
+		<li><img src="images/facebook.png" /></li>
+		<li><img src="images/rss.png" /></li>
+		<li><img src="images/twitter.png" /></li>
+		<li><img src="images/yahoo.png" /></li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,85 @@
+body, h1, h2, h3, h4, h5, h6, hr, p,span,blockquote,
+dl, dt, dd, ul, ol, li,
+pre,div,
+fieldset, button, input, textarea,tr
+th, td ,iframe,table,tr,td,img.span,label{margin:0;padding:0;
+}
+/* 设置默认字体 */
+body,
+button, input, select, textarea { /* for ie *//*font: 12px/1 Tahoma, Helvetica, Arial, "宋体", sans-serif;*/font: 16px/1 "Microsoft YaHei"; /* 用 ascii 字符表示，使得在任何编码下都无问题 */vertical-align: middle;font-size: 14px;
+}
+input,img,button{border:0 none;}
+h1 { font-size: 18px; /* 18px / 12px = 1.5 */ }
+h2 { font-size: 16px; }
+h3 { font-size: 14px; }
+h4, h5, h6 { font-size: 100%; }
+
+address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
+small { font-size: 12px; } /* 小于 12px 的中文很难阅读，让 small 正常化 */
+/* 重置列表元素 */
+ul, ol { list-style: none; }
+/* 重置文本格式元素 */
+a{color:#2dabff;text-decoration: none;}
+a.link,a:visited,a:hover,a:active{cursor: pointer;}/*
+a:hover { text-decoration: underline; }*/
+abbr[title], acronym[title] { /* 注：1.ie6 不支持 abbr; 2.这里用了属性选择符，ie6 下无效果 */border-bottom: 1px dotted;cursor: help;
+}
+/* 重置表单元素 */
+legend { color: #000; } /* for ie6 */
+fieldset, img { border: none; } /* img 搭车：让链接里的 img 无边框 */
+/* 注：optgroup 无法扶正 */
+button, input, select, textarea {font-size: 100%; /* 使得表单元素在 ie 下能继承字体大小 */
+}
+/* 重置表格元素 */
+table {border-collapse: collapse;border-spacing: 0;
+}
+/* 重置 hr */
+hr {border: none;height: 1px;
+}
+/* 让非ie浏览器默认也显示垂直滚动条，防止因滚动条引起的闪烁 */
+html { overflow-y: scroll; }
+.clearfix:before,.clearfix:after{display: table;content: " ";}
+.clearfix:after{clear: both;}
+
+.overflowH{overflow: hidden;}
+.inlineBlock{display: inline-block;}
+.disBlock{display: block;}
+.disNone{display: none;}
+.cursorPointer{cursor:pointer;}
+.textCenter{text-align: center;}
+.floatLeft{float:left;}
+.floatRight{float:right;}
+
+/* 自定义 */
+.lineH30{line-height: 30px;}
+.lineH60{line-height: 60px;}
+.size14{font-size:14px;}
+.size18{font-size:18px;}
+.size22{font-size:22px;}
+.size30{font-size:30px;}
+.size36{font-size:36px;}
+.size60{font-size:60px;}
+.color2dabff{color:#2dabff;}
+.colorccc{color:#ccd;}
+.marT10{margin-top:10px;}
+.marT20{margin-top:20px;}
+.marT23{margin-top:23px;}
+.marT32{margin-top:32px;}
+.marL20{margin-left:20px;}
+.marL30{margin-left:30px;}
+.marL176{margin-left:176px;}
+
+/* 遮罩 */
+.modalReg,
+.modal{display: none;}
+.modalRegBg,
+.modalBg{position: fixed;top:0;bottom:0;left:0;right:0;background:rgba(0,0,0,0.5);}
+.modalContainer{position: absolute;left:50%;top:50%;margin-left:-150px;margin-top:-184px;background: #fff;}
+.modal-head{height:48px; line-height: 48px;background: #2dabff;text-align: center;color:#fff;font-size:16px;}
+.modal-body{width: 300px;height: 260px;}
+.modal-body-reg{width: 300px;height: 60px;}
+.regBackMsg{line-height: 60px;text-align: center;}
+.treeBox{height:100%;}
+.modal-footer{margin-bottom: 10px;text-align: center;}
+.btn{width:90px;height:30px;background: #0096f0;border-radius: 4px;color:#fff;}
+.btn:hover{background: #2a6496;}

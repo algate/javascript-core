@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" class="comment" name="comment" placeholder="最多输入5个字符" maxlength="5" />
+</body>
+<!-- <script type="text/javascript" src="jquery1.8.2.js"></script> -->
+<script type="text/javascript">
+/*--------------处理placeholder----------------*/
+/* $(function(){
+    if(!placeholderSupport()){   // 判断浏览器是否支持 placeholder
+        $('[placeholder]').focus(function() {
+            var input = $(this);
+            if (input.val() == input.attr('placeholder')) {
+                input.val('');
+                input.removeClass('placeholder');
+            }
+        }).blur(function() {
+            var input = $(this);
+            if (input.val() == '' || input.val() == input.attr('placeholder')) {
+                input.addClass('placeholder');
+                input.val(input.attr('placeholder'));
+            }
+        }).blur();
+    };
+})
+function placeholderSupport() {
+    return 'placeholder' in document.createElement('input');
+} */
+
+/*原生js*/
+function placeholder(nodes, pcolor) {
+    // document_createElement_x("input")ie下支持
+    if(nodes.length && !("placeholder" in document_createElement_x("input"))) {
+        for(i=0;i<nodes.length;i++){
+            var self = nodes[i],
+                placeholder = self.getAttribute('placeholder') || '';     
+            self.onfocus = function(){
+                if(self.value == placeholder){
+                    self.value = '';
+                    self.style.color = "";
+                }               
+            }
+            self.onblur = function(){
+                if(self.value == ''){
+                    self.value = placeholder;
+                    self.style.color = pcolor;
+                }              
+            }                                       
+            self.value = placeholder;  
+            self.style.color = pcolor;              
+        }
+    }
+}
+
+// input兼容性问题：type为number时placeholder的值不显示
+$('input[type="number"]').each(function (i, el) {
+    el.type = 'text';
+    el.onfocus = function () { this.type = 'number'; };
+    el.onblur = function () { this.type = 'text'; };
+});
+var JPlaceHolder = {
+    //检测
+    _check: function () {
+        return 'placeholder' in document.createElement('input');
+    },
+    //初始化
+    init: function () {
+        if (!this._check()) {
+            this.fix();
+        }
+    },
+    //修复
+    fix: function () {
+        jQuery(':input[placeholder]').each(function (index, element) {
+            var self = $(this), txt = self.attr('placeholder');
+            self.wrap($('<div></div>').css({position:'relative', zoom:'1', border:'none', background:'none', padding:'none', margin:'none'}));
+            var pos = self.position(), h = self.outerHeight(true), paddingleft = self.css('padding-left');
+            var holder = $('<span></span>').text(txt).css({
+                position:'absolute',
+                left:pos.left,
+                top:pos.top,
+                height:h,
+                lienHeight:h,
+                paddingLeft:paddingleft,
+                color:'#aaa'}).appendTo(self.parent());
+            self.focusin(function (e) {
+                holder.hide();
+            }).focusout(function (e) {
+                if (!self.val()) {
+                    holder.show();
+                }
+            });
+            holder.click(function (e) {
+                holder.hide();
+                self.focus();
+            });
+        });
+    }
+};
+//执行
+jQuery(function () {
+    JPlaceHolder.init();    
+});
+</script>
+</html>

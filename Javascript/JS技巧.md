@@ -52,3 +52,8 @@ console.info(b3);
 ```javascript
 new URLSearchParams(location.search).get("name"); // 蜘蛛侠
 ```
+
+## 5.------ 禁用a
+```html
+<a href="javascript:;" id="a" style="pointer-events:none;">禁用(是否alert)</a>
+```

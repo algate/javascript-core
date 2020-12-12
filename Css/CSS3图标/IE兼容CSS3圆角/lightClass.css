@@ -1,0 +1,52 @@
+.nav_box{position: absolute;width:100%;z-index: 1;}
+.Logo{margin:30px 0 0 84px;}
+.nav{margin:45px 150px 0 0;font-size:16px;color:#fff;}
+.nav div{float:left;height:26px;margin-left:52px;cursor: pointer;position: relative;}
+.nav div:hover{color:#2dabff;}
+.header{width:100%;}
+.futureClassList{position:absolute;top:26px;display: none;background: #fff;width:104px;text-align: center;}
+.futureClassList li{line-height: 40px;height:40px;}
+.nav div:hover ul{display: block;color:#323232;}
+.bg_banner{width:100%;position: relative;
+    min-width:980px;}
+.banner_content{
+    position: absolute;
+    width:980px;
+    margin:0 auto;
+    top:162px;
+    left:50%;
+    margin-left:-490px;
+    text-align: center;
+    color:#fff;
+}
+.banner_phone{
+    position: absolute;
+    top:112px;right:-202px;
+}
+.downloadBtn button{width:330px;height:80px;border-radius: 40px;color:#fff;
+    background-color: #6bbff7;
+    background-image:-webkit-linear-gradient(left,#3aabf7,#6bbff7);
+    background-image:-o-linear-gradient(left,#3aabf7,#6bbff7);
+    background-image:-ms-linear-gradient(left,#3aabf7,#6bbff7);
+    background-image:linear-gradient(left,#3aabf7,#6bbff7);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3aabf7', endColorstr='#6bbff7',GradientType=0 );
+    /* background-color: #71c5cf;
+    background-image: linear-gradient(top,#5198b3 0,#71c5cf 100%);
+    background-image: -o-linear-gradient(top,#5198b3 0,#71c5cf 100%);
+    background-image: -moz-linear-gradient(top,#5198b3 0,#71c5cf 100%);
+    background-image: -webkit-linear-gradient(top,#5198b3 0,#71c5cf 100%);
+    background-image: -ms-linear-gradient(top,#5198b3 0,#71c5cf 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#5198b3),color-stop(1,#71c5cf));
+    background-position: center top;
+    background-repeat: no-repeat; */
+    behavior: url(ie-css3.htc);
+}
+.detail_list .details{width:980px;height:450px;margin:0 auto;overflow:hidden;}
+.detail_list:nth-child(even){background: #f0f4f7;}
+.detail_list:nth-child(odd){background: #fff;}
+.bg_dot li{background: url(img/dot.png) no-repeat 25px 14px;padding-left:72px;color:#323232;line-height: 34px;}
+.footer{height:60px;}
+
+.PCdownload button{width:162px;height:46px;background: #2dabff;font-size: 18px;line-height: 46px;color:#fff;border-radius: 23px;cursor:pointer;}
+.verticalLine{width:1px;height:236px;background: #fff;margin:0 86px;}
+.backBtn{position: absolute;top:36px; left:690px;cursor: pointer;}

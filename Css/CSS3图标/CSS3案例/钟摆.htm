@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>钟摆</title>
+<style type="text/css">
+*{ padding:0; margin:0;}
+.box1{ 
+	width:120px; height:300px; background:url(images/tb1.png) no-repeat; margin:20px auto;
+	-webkit-transform-origin:top center;
+	   -moz-transform-origin:top center;
+	    -ms-transform-origin:top center;
+	     -o-transform-origin:top center;
+	        transform-origin:top center;
+    -webkit-transform:rotate(45deg);
+            transform:rotate(45deg);
+    -webkit-animation:mymove1 1s ease infinite;
+            animation:mymove1 1s ease infinite;
+}
+@keyframes mymove1{
+  0%{-webkit-transform:rotate(45deg);}
+  50%{-webkit-transform:rotate(-45deg);}
+  100%{-webkit-transform:rotate(45deg);}
+}
+@-webkit-keyframes mymove1{
+  0%{-webkit-transform:rotate(45deg);}
+  50%{-webkit-transform:rotate(-45deg);}
+  100%{-webkit-transform:rotate(45deg);}
+}
+</style>
+</head>
+<body>
+	<div class="box1"></div>
+</body>
+</html>

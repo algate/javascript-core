@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style type="text/css">
+select{
+    /*font-size: 1.4rem;*/
+    outline:none;
+}
+select {
+    width: 250px;
+    /*注意在下拉框中，width是包括border的宽度的*/
+    padding-left:20px;
+    height: 40px;
+    border-radius: 2px;
+    border: 1px solid #e3e3e3;
+    background-color: white;
+    background-repeat: no-repeat;
+    /*背景图像的尺寸：第一个值为宽度，第二值为高度*/
+
+    /*background-size: 8px 8px, 8px 8px, 30px 30px, 1px 30px;*/
+    /*背景图片：多张图片用","分割*/
+    /*repeating-linear-gradient() 函数用于重复线性渐变：参数分别为角度，颜色1，颜色2,...*/
+    /*background-image: repeating-linear-gradient(225deg, rgb(105, 123, 149) 0%, rgb(105, 123, 149) 50%, transparent 50%, transparent 100%),*/
+    /*组合成三角形图标*/
+    /*repeating-linear-gradient(135deg, rgb(105, 123, 149) 0%, rgb(105, 123, 149) 50%, transparent 50%, transparent 100%),*/
+    /*组合成三角形图标*/
+    /*linear-gradient(#FFFFFF 0%, #F8F9Fd, #EFFAFA 100%),*/
+    /*竖分割线右侧的背景色*/
+    /*repeating-linear-gradient( rgb(191, 204, 220) 0%, rgb(191, 204, 220) 100%);*/
+    /*竖分割线*/
+    /*背景图片的位置：第一个参数为水平位置，第二参数为垂直位置*/
+    /*background-position: 175px 10px, 183px 10px, right top, 167px top;*/
+
+
+    background-size: 14px 8px, 44px 40px, 1px 40px;
+    /*背景图片：多张图片用","分割*/
+    /*repeating-linear-gradient() 函数用于重复线性渐变：参数分别为角度，颜色1，颜色2,...*/
+    background-image: url(drop_white.png),
+    /*组合成三角形图标*/
+    linear-gradient(#2dabff 0%, #2dabff 100%),
+    /*竖分割线右侧的背景色*/
+    repeating-linear-gradient(#e3e3e3 0%, #e3e3e3 100%);
+    /*竖分割线*/
+    /*背景图片的位置：第一个参数为水平位置，第二参数为垂直位置*/
+    background-position: 220px 16px, right top, 203px top;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+select::-ms-expand {
+    display: none;
+}
+/* select .select_option {
+    display: block;
+    height:40px;
+    line-height: 40px;
+} */
+option {
+    padding: 12px 0;
+}
+/*.customSelectPager2 select{width: 280px;padding-left:20px;height: 40px;border-radius: 2px;border: 1px solid #e3e3e3;background-color: white;background-repeat: no-repeat;background-size: 14px 8px, 44px 40px, 1px 40px;background-image: url(../img/drop_white.png), linear-gradient(#2dabff 0%, #2dabff 100%), repeating-linear-gradient(#e3e3e3 0%, #e3e3e3 100%);background-position: 250px 16px, right top, 233px top;appearance: none;-moz-appearance: none;-webkit-appearance: none;}*/
+
+
+.customSelectPager select{width: 64px;padding-left:8px;height: 26px;border-radius: 2px;border: 1px solid #e3e3e3;background-color: white;background-repeat: no-repeat;background-size: 14px 8px, 28px 26px, 1px 26px;background-image: url(drop_white.png), linear-gradient(#ebf1f5 0%, #ebf1f5 100%), repeating-linear-gradient(#e3e3e3 0%, #e3e3e3 100%);background-position:40px 9px, right top, 33px top;appearance: none;-moz-appearance: none;-webkit-appearance: none;}
+.custom_select_width select{
+    /*注意在下拉框中，width是包括border的宽度的*/
+    padding-left:20px;
+    padding-right:16px;
+    height: 40px;
+    border-radius: 2px;
+    border: 1px solid #e3e3e3;
+    background-color: white;
+    background-repeat: no-repeat;
+    /*背景图像的尺寸：第一个值为宽度，第二值为高度*/
+
+    /*background-size: 8px 8px, 8px 8px, 30px 30px, 1px 30px;*/
+    /*背景图片：多张图片用","分割*/
+    /*repeating-linear-gradient() 函数用于重复线性渐变：参数分别为角度，颜色1，颜色2,...*/
+    /*background-image: repeating-linear-gradient(225deg, rgb(105, 123, 149) 0%, rgb(105, 123, 149) 50%, transparent 50%, transparent 100%),*/
+    /*组合成三角形图标*/
+    /*repeating-linear-gradient(135deg, rgb(105, 123, 149) 0%, rgb(105, 123, 149) 50%, transparent 50%, transparent 100%),*/
+    /*组合成三角形图标*/
+    /*linear-gradient(#FFFFFF 0%, #F8F9Fd, #EFFAFA 100%),*/
+    /*竖分割线右侧的背景色*/
+    /*repeating-linear-gradient( rgb(191, 204, 220) 0%, rgb(191, 204, 220) 100%);*/
+    /*竖分割线*/
+    /*背景图片的位置：第一个参数为水平位置，第二参数为垂直位置*/
+    /*background-position: 175px 10px, 183px 10px, right top, 167px top;*/
+
+
+    background-size: 14px 8px, 44px 40px, 1px 40px;
+    /*背景图片：多张图片用","分割*/
+    /*repeating-linear-gradient() 函数用于重复线性渐变：参数分别为角度，颜色1，颜色2,...*/
+    background-image: url(drop_white.png),
+    linear-gradient(#2dabff 0%, #2dabff 100%),
+    repeating-linear-gradient(#e3e3e3 0%, #e3e3e3 100%);
+    /*改变背景图片的position起始点，四朵花都是border边缘处起，而平铺背景是在paddin内边缘起*/
+    -webkit-background-origin: content-box, padding-box,padding-box;
+    -moz-background-origin: content-box, padding-box,padding-box;
+    -o-background-origin: content-box, padding-box,padding-box;
+    background-origin: content-box, padding-box,padding-box;
+    /*控制背景图片的显示区域，所有背景图片超边border外边缘都将被剪切掉*/
+    /* -moz-background-clip: border-box;
+    -webkit-background-clip: border-box;
+    -o-background-clip: border-box;
+    background-clip: border-box; */
+    /*背景图片的位置：第一个参数为水平位置，第二参数为垂直位置*/
+    /*background-position: 220px 16px, right top, 203px top;*/
+    background-position: right 16px, right top, 203px top;
+}
+</style>
+<body>
+<div class="custom_select">
+    <select>
+        <option value="选择1">Connecticut</option>
+        <option value="选择2">New York</option>
+    </select>
+</div>
+<div class="customSelectPager">
+    <select>
+        <option value="选择1">10</option>
+        <option value="选择2">20</option>
+    </select>
+</div>
+<div class="custom_select_width">
+    <select>
+        <option value="选择1">Connecticut</option>
+        <option value="选择2">New York</option>
+    </select>
+</div>
+</body>
+</html>

@@ -6,7 +6,7 @@ var n = 2**3; // Math.pow(2, n); 或者2<<(n-1)
 // 2.------ float -> integer
 var int = 23.9 | 0;
 
-// ------ 格式化JSON格式 
+// 3.------ 格式化JSON格式 
 /* 我们可能在处理一些JSON相关的处理时很多时候都会使用到JSON.stringify，但是你是否意识到它可以帮助缩进JSON呢？ 
  * stringify()方法接受两个可选参数:一个replacer函数和一个space值，
  * 1. replacer函数可以用来过滤显示的JSON: 
@@ -27,7 +27,7 @@ console.info(json2);
     }
 }, 4)); */
 
-// 3.------ 数字格式化为数组 (map中的callback 函数只会在有值的索引上被调用)
+// 4.------ 数字格式化为数组 (map中的callback 函数只会在有值的索引上被调用)
 a1 = new Array(5);  // new Array(5) 生成的数组是从来没有被赋过值的 - item不存在
 // a2 - item
 // a2 = a1.map(item => ({name: 'a2'}));
@@ -35,17 +35,18 @@ a1 = new Array(5);  // new Array(5) 生成的数组是从来没有被赋过值�
 // console.table(a2);
 b1 = new Array(5).fill();
 // b2 - object数组；b3 - string数组
-b2 = b1.map(item => ({name: 'b2'}));    // ==> new Array(5).fill({]})
+b2 = b1.map(item => ({name: 'b2'}));    // ==> new Array(5).fill({})
 b3 = b1.map(item => '');  // ==> new Array(5).fill('')
 // console.info(b1);
 console.info(b2);
 console.info(b3);
 
-// 4.------ URLSearchParams
+// 5.------ URLSearchParams
 // 假设浏览器的url参数是 “?name=蜘蛛侠&age=16”：
 let url = new URLSearchParams(location.search).get("name");
 console.log(url);
 
-// 5.------ 禁用a
+// 6.------ 禁用a
 <a href="javascript:;" id="a" style="pointer-events:none;">禁用(是否alert)</a>
+
 </script>

@@ -1,13 +1,14 @@
 ## 1.------ 求幂运算
-
+```
 var n = 2\*\*3; // Math.pow(2, n); 或者 2<<(n-1)
+```
 
 ## 2.------ float -> integer
-
+```
 var int = 23.9 | 0;
+```
 
 ## 3.------ 格式化 JSON 格式
-
 我们可能在处理一些 JSON 相关的处理时很多时候都会使用到 JSON.stringify，但是你是否意识到它可以帮助缩进 JSON 呢？
 
 -   stringify()方法接受两个可选参数:一个 replacer 函数和一个 space 值，
@@ -52,8 +53,13 @@ console.info(b3);
 ```javascript
 new URLSearchParams(location.search).get("name"); // 蜘蛛侠
 ```
+new URLSearchParams() 的用法与 new URL().searchParams相同
+> 需要注意的一点是: ?如果放在url数据hash#的后边,例如
+> #href?name=蜘蛛侠&age=16
+> location.search获取的结果为" "空字符串;用URLSearchParams也就得不到想要的结果了;
 
-## 5.------ 禁用a
+
+## 6.------ 禁用a
 ```html
 <a href="javascript:;" id="a" style="pointer-events:none;">禁用(是否alert)</a>
 ```

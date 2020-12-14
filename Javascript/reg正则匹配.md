@@ -12,31 +12,29 @@ var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
 // 学号匹配：
 var reg = /\d+/;
 ```
-
+# RegExp
 ## defautl:
-
 ```html
-RegExp
 <1>对于exec方法：设置了全局g，每次调用exec()方法都会在字符串中继续查找新的匹配项,lastIndex属性值每次调用都会增加，直到找不到null,lastIndex==0;
 如果不设置全局g,在一个字符串多次调用exec()方法返回的都是第一次匹配的信息，lastIndex==0;
 <2>exec、match--不加g没有什么区别(exec的lastIndex永远是0)加上g则match忽略分组直接把总正则全部找出来；
     i--ignoreCase忽略大小写
     m--multiline分行和多行查找(m和表示开头^的元字符一起用才有意义)
-元字符：
-\d--所有的数字
-\w--包括下划线的所有单词字符[a-z][A-Z][0-9]_
-\s--任何空白字符(空格，制表符，换页符)
-\b--边界boundary;
-\n--换行
-\t--制表符
-.--除换行回车之外的一切字符如果想匹配本身，要加转义字符
-表示位置和数量的：^$,+*?{m,n},{m}{m,}
+<3>元字符：
+\d --所有的数字
+\w --包括下划线的所有单词字符[a-z][A-Z][0-9]_
+\s --任何空白字符(空格，制表符，换页符)
+\b --边界boundary;
+\n --换行
+\t --制表符
+. --除换行回车之外的一切字符如果想匹配本身，要加转义字符
+
+<4>表示位置和数量的：^$,+*?{m,n},{m}{m,}
 /4+/--/4{1,}/
 /4?/--/4{0,1}/
 /4*/--/4{0,}/
 /4{7}/----连续的7个4
 /^4{7}$/----严格匹配7个4，不能出现其他字符
-
 ```
 
 > **《1》** `/\d/;==/[0-9]/;[]--表示或--[0-11]`表示从 0 到 1 和 1 不是 11；
@@ -52,63 +50,44 @@ RegExp
 > `?:`--表示匹配不捕获`/((?:\d)+1+)/;`
 > `woow,4004--reg=/^(\w)(\w)\2\1$/--\2`指的是位置不是数量(子正则表达式位置)相对应重复
 
-## 分组应用
+### ?: ?=和?! 匹配不捕获
+##### 1.理解?=和?!,首先需要理解前瞻，后顾，负前瞻，负后顾四个概念:
+
+**// 前瞻：**
+exp1(?=exp2) 查找exp1后面等于exp2的exp1
+**// 后顾：**
+(?<=exp2)exp1 查找exp1前面等于exp2的exp1
+**// 负前瞻：**
+exp1(?!exp2) 查找exp1后面不是exp2的exp1
+**// 负后顾：**
+(?<!exp2)exp1 查找exp1前面不是exp2的exp1
 
 ```javascript
-<--第一个方法-->
-// 没有分组的话传递三个参数(匹配的结果,匹配到的索引位置,原有的字符串)
-var str="23209340928";
-    var reg=/^(\d{1,3})((?:\d{3})+)$/;
-    // 传递六个参数，?:表示不需要捕获
-var str1=str.replace(reg,function(ar0,ar1,ar2){
-    //第一个参数是总正则匹配到的结果
-    //第二个参数是第一个子正则匹配到的结果
-    //……
-    //倒数第二个参数是总正则在原字符串种匹配到的索引位置
-    //原来的字符串
-    return ar1+ar2.replace(/\d{3}/g,function(rs){
-        return ","+rs;
-    });
-});
-// <--第二个方法-->
-var str2=str.replace(/\d/g,function(r,i){
-    var n=(str.length-1-i)%3;
-    if(n==0&&str.length-1-i>0){
-        return r+",";
-    }
-    else{
-        return r;
-    };
-});
-// <--第三个方法-->
-var strTemp=str.split("").reverse().join("");
-//?=pattern正向预查要匹配的字符串后面必须紧跟着pattern
-var str3=strTemp.replace(/(\d{3})(?!$)/g,"$1,");
-//最后末尾加了一个逗号，倒过来首位就多了一个逗号
-str3=str3.split("").reverse().join("");
-//正向预查，负向预查
-//得到的结尾处有","----正向预查(最后必须满足三位)
+/* ?: ?=和?! 匹配不捕获 */
+let m1 = "你是chinese人".replace(/你是(?=chinese)/, "我是"); // 匹配"你是chinese人"中的“你是”后面=“chinese”的“你是”，将其替换为我是，结果为：我是chinese人
+console.log("exp1(?=exp2)：查找exp1后面等于exp2的exp1", m1);
+let m2 = "你是chinese人".replace(/我是(?=chinese)/, "你是"); // 匹配"你是chinese人"中的“我是”后面=“chinese”的“我是”，字符串中chinese前边是你是，所以不能匹配
+console.log("?=", m2);
+let m = "你是chinese人".replace(/(?<=chinese)人/, " people"); // 匹配"你是chinese人"中的“人”前面=“chinese”的“人”，将其替换为 people，结果为：你是chinese people
+console.log("?<=", m);
+
+let n2 = "你是中国人".replace(/你是(?!chinese)/, "我肯定是"); // 匹配"你是chinese人"中"你是"后面非chinese的你是，将其替换为我肯定是，结果为：我肯定是中国人
+console.log("exp1(?!exp2) 查找exp1后面不是exp2的exp1", n2);
+let n1 = "你是chinese中国人".replace(/你是(?!chinese)/, "，我肯定是"); // 匹配"你是chinese人"中"你是"后面非chinese的你是，字符串中你是后边是chinese，所以不能匹配
+console.log("?!", n1);
+let n = "你是chinese中国人".replace(/(?<!chinese)人/, "，我是"); // 匹配"你是chinese人"中"人"前面非chinese的中国，将其替换为的，结果为：你是chinese中国，我是
+console.log("?<!", n);
 ```
 
-#### ?: ?=和?!--匹配不捕获
+##### 2.理解?:则需要理解捕获分组和非捕获分组的概念：
+`()`表示捕获分组，()会把每个分组里的匹配的值保存起来，使用$n(n是一个数字，表示第n个捕获组的内容)
+`(?:)`表示非捕获分组，和捕获分组唯一的区别在于，非捕获分组匹配的值不会保存起来
 
-`?=pattern`--正向预查要匹配的字符串后面必须紧跟 pattern
-`(?!$)`当匹配到最后末尾是结尾的时候，才匹配；
-形式：`(?=pattern)` 所谓正向预查，意思就是：要匹配的字符串，后面必须紧跟着`pattern`！ 我们知道正则表达式/cainiao/会匹配 cainiao。同样，也会匹配 cainiao9 中的 cainiao。但是我们可能希望，cainiao 只能匹配 cainiao8 中的 cainiao
-`?!pattern`--反向预查要匹配的字符串后面不能紧跟着 pattern
-(?1$)当匹配的字符串末尾不是结束的时候就会匹配，直到末·尾为结束时不再匹配；
-形式`(?!pattern)`和`?=`恰好相反，要求字符串的后面不能紧跟着某个 pattern
+1. `匹配(?=pattern)`：正向预查要匹配的字符串后面必须紧跟表达式pattern
+2. `匹配(?!pattern)`：反向预查要匹配的字符串后面不紧跟着表达式pattern
+3. `(?:pattern)`表示非捕获分组，和捕获分组唯一的区别在于，非捕获分组匹配的值不会保存起来
 
-```javascript
-var str = "232093409280";
-var reg = /^(\d{1,3})((?:\d{3})+)$/;
-var strTemp = str.split("").reverse().join("");
-var str3 = strTemp.replace(/(\d{3})(?!$)/g, "$1,");
-//匹配的字符串不再末尾就执行，匹配遇到末尾就不匹配了；
-str3 = str3.split("").reverse().join("");
-console.log(str3);
-```
-
+### 简单应用
 ```javascript
 匹配空白行的正则表达式：\n\s*\r
 匹配中文字符的正则表达式： [\u4e00-\u9fa5]
@@ -133,10 +112,76 @@ console.log(str3);
 　　^w+$　　//匹配由数字、26个英文字母或者下划线组成的字符串
 ```
 
-应用：javascript 中没有像 vbscript 那样的 trim 函数，我们就可以利用这个表达式来实现
 
+## 分组应用
+```javascript
+// <--第一个方法-->
+// 没有分组的话传递三个参数(匹配的结果,匹配到的索引位置,原有的字符串)
+var str="23209340928";
+    var reg=/^(\d{1,3})((?:\d{3})+)$/;
+    // 传递六个参数，?:表示不需要捕获
+var str1=str.replace(reg,function(ar0,ar1,ar2){
+    // 第一个参数是总正则表达式匹配到的结果
+    // 第二个参数是第一个子正则()匹配到的结果
+    // 第三个参数为第二个子正则()匹配到的结果
+    // ……
+    // 倒数第二个参数是总正则表达式在原字符串种匹配到的索引位置
+    // 原来的字符串str
+    return ar1+ar2.replace(/\d{3}/g,function(rs){
+        return ","+rs;
+    });
+});
+// <--第二个方法-->
+var str2=str.replace(/\d/g,function(r,i){
+    var n=(str.length-1-i)%3;
+    if(n==0&&str.length-1-i>0){
+        return r+",";
+    }
+    else{
+        return r;
+    };
+});
+// <--第三个方法-->
+var strTemp=str.split("").reverse().join("");
+//?=pattern正向预查要匹配的字符串后面必须紧跟着pattern
+var str3=strTemp.replace(/(\d{3})(?!$)/g,"$1,");
+//最后末尾加了一个逗号，倒过来首位就多了一个逗号
+str3=str3.split("").reverse().join("");
+//正向预查，负向预查
+//得到的结尾处有","----正向预查(最后必须满足三位)
+```
+
+```javascript
+var str = "232093409280";
+var reg = /^(\d{1,3})((?:\d{3})+)$/;
+var strTemp = str.split("").reverse().join("");
+var str3 = strTemp.replace(/(\d{3})(?!$)/g, "$1,");
+//匹配的字符串不再末尾就执行，匹配遇到末尾就不匹配了；
+str3 = str3.split("").reverse().join("");
+console.log(str3);
+```
+
+## 应用：数字分隔
+javascript 中没有像 vbscript 那样的 trim 函数，我们就可以利用这个表达式来实现
 ```javascript
 String.prototype.trim = function () {
     return this.replace(/(^s*)|(s*$)/g, "");
 };
+```
+
+## 应用：字符串多个匹配项分隔
+```javascript
+// 要求吧冒号：后边的字符截取出来
+var code = `
+    设备型号：XBY-FJ-NN114FS-14
+    资产编码：YST20002002
+    资产属性：养生堂集团所有
+    服务电话：95077
+`;
+let reg = /(.+?:)：([^\s]*)/g;
+let list = code.replace(reg, (...args) => {
+    console.log(args);
+    return args;
+})
+console.log(list);
 ```

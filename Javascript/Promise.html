@@ -6,17 +6,30 @@
     // 基础版本
     class Promise {
         constructor(fn) {
-            // 三个状态
+            /* 
+             * promise有三个状态：
+                1、pending[待定]初始状态
+                2、fulfilled[实现]操作成功
+                3、rejected[被否决]操作失败
+                当promise状态发生改变，就会触发then()里的响应函数处理后续步骤；
+                promise状态一经改变，不会再变。
+              */
             this.state = "pending";
             this.value = undefined;
             this.reason = undefined;
-
+            /* 
+             * resolve作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），
+             在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；
+            */
             let resolve = (value) => {
                 if (this.state === "pending") {
                     this.state = "fulfilled";
                     this.value = value;
                 }
             };
+            /* 
+             * reject作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
+            */
             let reject = (value) => {
                 if (this.state === "pending") {
                     this.state = "rejected";
@@ -31,6 +44,12 @@
             }
         }
         // then
+        /* 
+         * Promise对象的状态改变，只有两种可能：
+            从pending变为fulfilled
+            从pending变为rejected。
+            这两种情况只要发生，状态就凝固了，不会再变了。 
+          */
         then(onFulfilled, onRejected) {
             switch (this.state) {
                 case "fulfilled":
@@ -222,4 +241,217 @@
             resolve(x);
         }
     }
+
+    /* 补充版 */
+    // 三种状态
+    const PENDING = "pending";
+    const RESOLVED = "resolved";
+    const REJECTED = "rejected";
+
+    function MyPromise(fn) {
+        let _this = this;
+        _this.currentState = PENDING;
+        _this.value = undefined;
+        _this.resolvedCallbacks = [];
+        _this.rejectedCallbacks = [];
+
+        _this.resolve = function (value) {
+            if (value instanceof MyPromise) {
+                return value.then(_this.resolve, _this.reject);
+            }
+            setTimeout(() => {
+                if (_this.currentState === PENDING) {
+                    _this.currentState = RESOLVED;
+                    _this.value = value;
+                    _this.resolvedCallbacks.forEach((cb) => cb());
+                }
+            });
+        };
+
+        _this.reject = function (reason) {
+            setTimeout(() => {
+                if (_this.currentState === PENDING) {
+                    _this.currentState = REJECTED;
+                    _this.value = reason;
+                    _this.rejectedCallbacks.forEach((cb) => cb());
+                }
+            });
+        };
+        try {
+            fn(_this.resolve, _this.reject);
+        } catch (e) {
+            _this.reject(e);
+        }
+    }
+
+    MyPromise.prototype.then = function (onResolved, onRejected) {
+        var self = this;
+        var promise2;
+        onResolved = typeof onResolved === "function" ? onResolved : (v) => v;
+        onRejected =
+            typeof onRejected === "function"
+                ? onRejected
+                : (r) => {
+                      throw r;
+                  };
+
+        if (self.currentState === RESOLVED) {
+            return (promise2 = new MyPromise(function (resolve, reject) {
+                setTimeout(function () {
+                    try {
+                        var x = onResolved(self.value);
+                        resolutionProcedure(promise2, x, resolve, reject);
+                    } catch (reason) {
+                        reject(reason);
+                    }
+                });
+            }));
+        }
+
+        if (self.currentState === REJECTED) {
+            return (promise2 = new MyPromise(function (resolve, reject) {
+                setTimeout(function () {
+                    try {
+                        var x = onRejected(self.value);
+                        resolutionProcedure(promise2, x, resolve, reject);
+                    } catch (reason) {
+                        reject(reason);
+                    }
+                });
+            }));
+        }
+
+        if (self.currentState === PENDING) {
+            return (promise2 = new MyPromise(function (resolve, reject) {
+                self.resolvedCallbacks.push(function () {
+                    try {
+                        var x = onResolved(self.value);
+                        resolutionProcedure(promise2, x, resolve, reject);
+                    } catch (r) {
+                        reject(r);
+                    }
+                });
+
+                self.rejectedCallbacks.push(function () {
+                    try {
+                        var x = onRejected(self.value);
+                        resolutionProcedure(promise2, x, resolve, reject);
+                    } catch (r) {
+                        reject(r);
+                    }
+                });
+            }));
+        }
+    };
+
+    // 规范 2.3
+    function resolutionProcedure(promise2, x, resolve, reject) {
+        if (promise2 === x) {
+            return reject(new TypeError("Error"));
+        }
+        if (x instanceof MyPromise) {
+            if (x.currentState === PENDING) {
+                x.then(function (value) {
+                    resolutionProcedure(promise2, value, resolve, reject);
+                }, reject);
+            } else {
+                x.then(resolve, reject);
+            }
+            return;
+        }
+        let called = false;
+        if (x !== null && (typeof x === "object" || typeof x === "function")) {
+            try {
+                let then = x.then;
+                if (typeof then === "function") {
+                    then.call(
+                        x,
+                        (y) => {
+                            if (called) return;
+                            called = true;
+                            resolutionProcedure(promise2, y, resolve, reject);
+                        },
+                        (e) => {
+                            if (called) return;
+                            called = true;
+                            reject(e);
+                        }
+                    );
+                } else {
+                    resolve(x);
+                }
+            } catch (e) {
+                if (called) return;
+                called = true;
+                reject(e);
+            }
+        } else {
+            resolve(x);
+        }
+    }
+
+    // catch方法
+    MyPromise.prototype.catch = function (rejectFn) {
+        return this.then(undefined, rejectFn);
+    };
+
+    //finally方法
+    MyPromise.prototype.finally = function (callback) {
+        return this.then(
+            (value) => MyPromise.resolve(callback()).then(() => value),
+            (reason) =>
+                MyPromise.resolve(callback()).then(() => {
+                    throw reason;
+                })
+        );
+    };
+
+    /* 
+        静态方法添加
+    */
+
+    // resolve方法
+    MyPromise.resolve = function (val) {
+        return new MyPromise((resolve, reject) => {
+            resolve(val);
+        });
+    };
+
+    //reject方法
+    MyPromise.reject = function (val) {
+        return new MyPromise((resolve, reject) => {
+            reject(val);
+        });
+    };
+
+    //race方法
+    MyPromise.race = function (promises) {
+        return new MyPromise((resolve, reject) => {
+            for (let i = 0; i < promises.length; i++) {
+                promises[i].then(resolve, reject);
+            }
+        });
+    };
+
+    //all方法(获取所有的promise，都执行then，把结果放到数组，一起返回)
+    MyPromise.all = function (promises) {
+        let arr = [];
+        let i = 0;
+
+        function processData(index, data) {
+            arr[index] = data;
+            i++;
+            if (i == promises.length) {
+                resolve(arr);
+            }
+        }
+
+        return new Promise((resolve, reject) => {
+            for (let i = 0; i < promises.length; i++) {
+                promises[i].then((data) => {
+                    processData(i, data);
+                }, reject);
+            }
+        });
+    };
 </script>

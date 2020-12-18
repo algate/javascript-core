@@ -11,7 +11,7 @@
 	ul li{
 		float:left;margin:20px;
 	}
-		#diagrams{
+		.diagrams{
 			width:192px;height:96px;
 			border-width:4px 4px 100px 4px;
 			border-style: solid;
@@ -20,7 +20,7 @@
 			border-radius: 50%;
 			position:relative;
 		}
-		#diagrams:before{
+		.diagrams:before{
 			width:16px;height:16px;
 			content:"";
 			position:absolute;
@@ -30,7 +30,7 @@
 			border:40px solid black;
 			border-radius:50%;
 		}
-		#diagrams:after{
+		.diagrams:after{
 			width:16px;height:16px;
 			content:"";
 			position:absolute;
@@ -45,11 +45,7 @@
 <body>
 	<!-- <div id="diagrams">八卦图</div> -->
 	<ul>
-		<li id="diagrams"></li>
-		<li id="diagrams"></li>
-		<li id="diagrams"></li>
-		<li id="diagrams"></li>
-		<li id="diagrams"></li>
+		<li class="diagrams"></li>
 	</ul>
 </body>
 </html>

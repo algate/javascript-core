@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <ul>
+            <li><a href="/model-hash#/">我是主页</a></li>
+            <li><a href="/model-hash#/a">我是a页面</a></li>
+            <li><a href="/model-hash#/b">我是b页面</a></li>
+        </ul>
+    </body>
+    <script>
+        class HashRouter {
+            constructor() {
+                // 存储hash与callback键值对
+                this.routes = {};
+                // 保存当前的hash
+                this.currentHash = "";
+
+                // 绑定事件
+                const hashChangeUrl = this.hashChangeUrl.bind(this);
+
+                // 页面加载事件 DOMContentLoaded 或者 load
+                window.addEventListener("DOMContentLoaded", hashChangeUrl, false);
+                // 监听hashchange事件
+                window.addEventListener("hashchange", hashChangeUrl, false);
+                // window.addEventListener("popstate", hashChangeUrl, false);
+            }
+            // path路径和callback函数对应起来，并且使用 上面的this.routes存储起来
+            route(path, callback) {
+                this.routes[path] = callback || function () {};
+            }
+            hashChangeUrl(e) {
+                /*
+                    获取当前的hash值
+                    location.hash 获取的值为："#/a, 因此 location.hash.slice(1) = '/a' 这样的
+                */
+                console.log(e, location.hash);
+                this.currentHash = location.hash.slice(1) || "/";
+                // 执行当前hash对应的callback函数
+                console.log(this.routes);
+                this.routes[this.currentHash]();
+            }
+        }
+        // 初始化
+        const Router = new HashRouter();
+        const body = document.querySelector("body");
+        const changeColor = function (color) {
+            body.style.backgroundColor = color;
+        };
+        // 注册函数
+        Router.route("/", () => {
+            changeColor("#ffeeb0");
+        });
+        Router.route("/a", () => {
+            changeColor("#d2fdd2");
+        });
+        Router.route("/b", () => {
+            changeColor("#b7efb0");
+        });
+    </script>
+</html>

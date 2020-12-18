@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h2>文件测试需要启动服务器，本地文件访问/a，或者/b，无法找到文件</h2>
+        <ul>
+            <li><a href="/historyaddListener">我是主页</a></li>
+            <li><a href="/historyaddListener/a">我是a页面</a></li>
+            <li><a href="/historyaddListener/b">我是b页面</a></li>
+        </ul>
+    </body>
+    <script>
+        class HistoryRoutes {
+            constructor() {
+                // 保存对应键和函数
+                this.routes = {};
+                // 给refres绑定this, 否则addEventListener执行的时候，this指向了window
+                this.refresh = this.refresh.bind(this);
+                // window.addEventListener('DOMContentLoaded', this.refresh, false);
+                // 监听popstate事件
+                /* 
+                    历史栈有信息发生改变的话，就会触发该事件
+                    1.history.go(), history.back()会触发该事件
+                    2.replaceState 不会触发onpopstate事件
+                    3.pushState 不会触发oppopstate事件
+
+                    针对这种情况，我们可以使用window.dispatchEvent添加事件：
+                    访问historyaddListener.html
+                 */
+                window.addEventListener("popstate", () => {
+                    /* 
+                        此处可以用 this.refresh 代替，为了测试添加注释写在此处
+                        1.刷新页面replaceState, 不会触发popstate
+                        2.点击href链接pushState, 不会触发popstate
+                        3.点击浏览器的back()、go()， 才会触发popstate事件
+                    */
+                    console.log(event);
+                    const path = this.getState();
+                    this.routes[path] && this.routes[path]();
+                }, false);
+                /* 
+                    针对这种情况，我们可以使用window.dispatchEvent添加事件：
+                    1.replaceState
+                    2.pushState
+                 */
+                this.addStateListener();
+                window.addEventListener("pushState",  this.refresh, false);
+                window.addEventListener("replaceState", this.refresh, false);
+            }
+            addStateListener() {
+                const listener = function (type) {
+                    var orig = history[type];
+                    return function () {
+                        var rv = orig.apply(this, arguments);
+                        var e = new Event(type);
+                        e.arguments = arguments;
+                        window.dispatchEvent(e);
+                        return rv;
+                    };
+                };
+                window.history.pushState = listener('pushState');
+                window.history.replaceState = listener('replaceState');
+            }
+            // 获取路由路径
+            getState() {
+                const path = window.location.pathname;
+                return path ? path : "/historyaddListener";
+            }
+            refresh(event) {
+                console.log(event);
+                const path = this.getState();
+                this.routes[path] && this.routes[path]();
+            }
+            route(path, callback) {
+                this.routes[path] = callback || function () {};
+            }
+            init(path) {
+                // 替换当前页在历史记录中的信息。
+                history.replaceState(null, null, path);
+                console.log('replaceState', path);
+                this.routes[path] && this.routes[path]();
+            }
+            go(path) {
+                // 向历史记录中追加一条记录
+                history.pushState(null, null, path);
+                console.log('pushState', path);
+                this.routes[path] && this.routes[path]();
+            }
+        }
+
+        const Router = new HistoryRoutes();
+        /* 
+            // Router.init(location.pathname);
+            1.刚进入页面初始化执行init函数，页面内容和事件还没加载完成，导致页面颜色没有变化
+            2.放到DOMContentLoaded事件之后再或者load之后就可以了,
+            3.也可以监听DOMContentLoaded或者load之后，直接执行this.refresh
+                本页代码第22行那样
+        */
+        window.addEventListener("DOMContentLoaded", (e) => {
+            console.log(e);
+            Router.init(location.pathname);
+        });
+
+        const body = document.querySelector("body");
+
+        const changeColor = function (color) {
+            body.style.backgroundColor = color;
+        };
+        // 注册函数
+        Router.route("/historyaddListener", () => {
+            changeColor("#ffeeb0");
+        });
+        Router.route("/historyaddListener/a", () => {
+            changeColor("#d2fdd2");
+        });
+        Router.route("/historyaddListener/b", () => {
+            changeColor("#b7efb0");
+        });
+
+        const ul = document.querySelector("ul");
+        ul.addEventListener("click", (e) => {
+            if (e.target.tagName === "A") {
+                e.preventDefault();
+                Router.go(e.target.getAttribute("href"));
+            }
+        });
+    </script>
+</html>

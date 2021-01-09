@@ -6,7 +6,7 @@
 
 ## DOMContentLoaded: 
 从页面空白到展示出页面内容，会触发DOMContentLoaded事件。
-DOMContentLoaded 的触发不需要等待图片等其他资源加载完成。。
+DOMContentLoaded 的触发不需要等待图片等其他资源加载完成。
 这里我们可以明确DOMContentLoaded所计算的时间，当文档中没有脚本时，浏览器解析完文档便能触发 DOMContentLoaded 事件；
 
 ## load: 

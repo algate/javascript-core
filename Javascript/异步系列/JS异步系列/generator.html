@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<script>
+function* helloDriver() {
+    yield 'hello';
+    yield 'Driver';
+    return 'good!';
+}
+let driver = helloDriver();
+
+console.log(typeof helloDriver);
+console.log(driver.next());
+console.log(driver.next());
+console.log(driver.next());
+console.log(driver.next());
+</script>

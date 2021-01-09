@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<script>
+    const promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log("once");
+            resolve("success");
+        }, 1000);
+        // console.log(1);
+    });
+
+    const start = Date.now();
+    promise.then((res) => {
+        console.log(res, Date.now() - start);
+    });
+    promise.then((res) => {
+        console.log(res, Date.now() - start);
+    });
+    /* 
+        Promise 构造函数是同步执行的，promise.then 中的函数是异步执行的。
+        1.JS是单线程语言
+        2.promise 有 3 种状态：pending、fulfilled 或 rejected。状态改变只能是 pending->fulfilled 或者 pending->rejected，状态一旦改变则不能再变。
+        3.promise 的 .then 或者 .catch 可以被调用多次。
+    */
+</script>

@@ -2,8 +2,9 @@
 <script>
     /* bind 函数 */
     // 通过闭包调用 call || apply 可以实现 bind 函数
+    // apply 数组参数； call() 参数用逗号分隔 == bind()()
     // 乞丐版
-    Function.prototype.myapply = function (context, ...preArgs) {
+    Function.prototype.mybind = function (context, ...preArgs) {
         return (...args) => this.call(context, ...preArgs, ...args);
     };
     // 进阶版

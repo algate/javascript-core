@@ -1,52 +1,172 @@
 <!DOCTYPE html>
 <script>
-// 1.------ 求幂运算 
-var n = 2**3; // Math.pow(2, n); 或者2<<(n-1)
+    // 1.------ 求幂运算
+    var n = 2 ** 3; // Math.pow(2, n); 或者2<<(n-1)
 
-// 2.------ float -> integer
-var int = 23.9 | 0;
+    // 2.------ float -> integer
+    var int = 23.9 | 0;
 
-// 3.------ 格式化JSON格式 
-/* 我们可能在处理一些JSON相关的处理时很多时候都会使用到JSON.stringify，但是你是否意识到它可以帮助缩进JSON呢？ 
- * stringify()方法接受两个可选参数:一个replacer函数和一个space值，
- * 1. replacer函数可以用来过滤显示的JSON: 
- * 1.1 如果该参数是一个函数，则在序列化过程中，被序列化的值的每个属性都会经过该函数的转换和处理；
- * 1.2 如果该参数是一个数组，则只有包含在这个数组中的属性名才会被序列化到最终的 JSON 字符串中；(嵌套的对象型数据要展示要把属性名放到数组中)
- * 1.3 如果该参数为 null 或者未提供，则对象所有的属性都会被序列化;
- * 2. space值接受一个整数，表示需要的空格数或一个字符串替换空格(1-10||' '|| null)
- */
-let json = { alpha: 'A', name: { code: "json", id: 1 }, beta: 'B', nodes: [{id: 1},{id: 2}]};
-// 对象数据类型 要展示的属性 - 一并挨着罗列到数组中才会显示，否是显示为[{}]/{};
-let json2 = JSON.stringify(json, ['code','nodes','id'], 4);
-console.log(JSON.stringify(json, null, 4));
-console.info(json2);
-/* console.log(JSON.stringify(json, (key, value)=>{
+    // 3.------ 格式化JSON格式
+    /* 我们可能在处理一些JSON相关的处理时很多时候都会使用到JSON.stringify，但是你是否意识到它可以帮助缩进JSON呢？
+     * stringify()方法接受两个可选参数:一个replacer函数和一个space值，
+     * 1. replacer函数可以用来过滤显示的JSON:
+     * 1.1 如果该参数是一个函数，则在序列化过程中，被序列化的值的每个属性都会经过该函数的转换和处理；
+     * 1.2 如果该参数是一个数组，则只有包含在这个数组中的属性名才会被序列化到最终的 JSON 字符串中；(嵌套的对象型数据要展示要把属性名放到数组中)
+     * 1.3 如果该参数为 null 或者未提供，则对象所有的属性都会被序列化;
+     * 2. space值接受一个整数，表示需要的空格数或一个字符串替换空格(1-10||' '|| null)
+     */
+    let json = {
+        alpha: "A",
+        name: { code: "json", id: 1 },
+        beta: "B",
+        nodes: [{ id: 1 }, { id: 2 }],
+    };
+    // 对象数据类型 要展示的属性 - 一并挨着罗列到数组中才会显示，否是显示为[{}]/{};
+    let json2 = JSON.stringify(json, ["code", "nodes", "id"], 4);
+    console.log(JSON.stringify(json, null, 4));
+    console.info(json2);
+    /* console.log(JSON.stringify(json, (key, value)=>{
     if(typeof value === 'object' && !Array.isArray(value)) {
         return value; // number,string,boolean,undefined; 如果返回对象 
         // return key; // 字符串，啥也不显示
     }
 }, 4)); */
 
-// 4.------ 数字格式化为数组 (map中的callback 函数只会在有值的索引上被调用)
-a1 = new Array(5);  // new Array(5) 生成的数组是从来没有被赋过值的 - item不存在
-// a2 - item
-// a2 = a1.map(item => ({name: 'a2'}));
-// console.info(a1);
-// console.table(a2);
-b1 = new Array(5).fill();
-// b2 - object数组；b3 - string数组
-b2 = b1.map(item => ({name: 'b2'}));    // ==> new Array(5).fill({})
-b3 = b1.map(item => '');  // ==> new Array(5).fill('')
-// console.info(b1);
-console.info(b2);
-console.info(b3);
+    // 4.------ 数字格式化为数组 (map中的callback 函数只会在有值的索引上被调用)
+    a1 = new Array(5); // new Array(5) 生成的数组是从来没有被赋过值的 - item不存在
+    // a2 - item
+    // a2 = a1.map(item => ({name: 'a2'}));
+    // console.info(a1);
+    // console.table(a2);
+    b1 = new Array(5).fill();
+    // b2 - object数组；b3 - string数组
+    b2 = b1.map((item) => ({ name: "b2" })); // ==> new Array(5).fill({})
+    b3 = b1.map((item) => ""); // ==> new Array(5).fill('')
+    // console.info(b1);
+    console.info(b2);
+    console.info(b3);
 
-// 5.------ URLSearchParams
-// 假设浏览器的url参数是 “?name=蜘蛛侠&age=16”：
-let url = new URLSearchParams(location.search).get("name");
-console.log(url);
+    // 5.------ URLSearchParams
+    // 假设浏览器的url参数是 “?name=蜘蛛侠&age=16”：
+    let url = new URLSearchParams(location.search).get("name");
+    console.log(url);
 
-// 6.------ 禁用a
-<a href="javascript:;" id="a" style="pointer-events:none;">禁用(是否alert)</a>
+    // 6.------ 禁用a
+    /* <a href="javascript:;" id="a" style="pointer-events:none;">禁用(是否alert)</a> */
 
+    // 7.------ 取值
+    /*
+     * || 取值 0, '', null, undefined
+     * ?? 取值 null，undefined
+     */
+    console.log(0 || "not value");
+    console.log(0 ?? "not null or undefined");
+    console.log("" || "not value");
+    console.log("" ?? "not null or undefined");
+
+    // 8.------ 可选链
+    obj = {
+        name: "core",
+        content: {
+            title: "JSJQ",
+            data: [
+                {
+                    id: Math.ceil(Math.random() * 10000),
+                    name: "darwin",
+                },
+            ],
+        },
+    };
+    console.log(obj?.name || "not value");
+    console.log(obj?.content?.data[0]?.name || "not value");
+    console.log(obj?.content?.data?.[0]?.name || "not value");
+    console.log(obj.constructor());
+
+    // 9.------ 类型检查小工具
+    const isOfType = (() => {
+        // create a plain object with no prototype
+        const type = Object.create(null);
+
+        // check for null type
+        type.null = (x) => x === null;
+        // check for undefined type
+        type.undefined = (x) => x === undefined;
+        // check for nil type. Either null or undefined
+        type.nil = (x) => type.null(x) || type.undefined(x);
+        // check for strings and string literal type. e.g: 's', "s", `str`, new String()
+        type.string = (x) =>
+            !type.nil(x) && (typeof x === "string" || x instanceof String);
+        // check for number or number literal type. e.g: 12, 30.5, new Number()
+        type.number = (x) =>
+            !type.nil(x) && // NaN & Infinity have typeof "number" and this excludes that
+            ((!isNaN(x) && isFinite(x) && typeof x === "number") ||
+                x instanceof Number);
+        // check for boolean or boolean literal type. e.g: true, false, new Boolean()
+        type.boolean = (x) =>
+            !type.nil(x) && (typeof x === "boolean" || x instanceof Boolean);
+        // check for array type
+        type.array = (x) => !type.nil(x) && Array.isArray(x);
+        // check for object or object literal type. e.g: {}, new Object(), Object.create(null)
+        type.object = (x) => ({}.toString.call(x) === "[object Object]");
+        // check for provided type instance
+        type.type = (x, X) => !type.nil(x) && x instanceof X;
+        // check for set type
+        type.set = (x) => type.type(x, Set);
+        // check for map type
+        type.map = (x) => type.type(x, Map);
+        // check for date type
+        type.date = (x) => type.type(x, Date);
+        return type;
+    })();
+    console.log(isOfType.nil(null));
+
+    // 10.------ 顺序执行 promise
+    const asyncSequentializer = (() => {
+        const toPromise = (x) => {
+            if (x instanceof Promise) {
+                // if promise just return it
+                return x;
+            }
+            if (typeof x === "function") {
+                // if function is not async this will turn its result into a promise
+                // if it is async this will await for the result
+                return (async () => await x())();
+            }
+            return Promise.resolve(x);
+        };
+        return (list) => {
+            const results = [];
+            return (
+                list
+                    .reduce((lastPromise, currentPromise) => {
+                        return lastPromise.then((res) => {
+                            results.push(res); // collect the results
+                            return toPromise(currentPromise);
+                        });
+                    }, toPromise(list.shift()))
+                    // collect the final result and return the array of results as resolved promise
+                    .then((res) => Promise.resolve([...results, res]))
+            );
+        };
+    })();
+
+    // 11.------ 条件对象键
+    let condition = true;
+    man = {
+        name: "manoeasy",
+        ...(condition === true ? { title: "manoeasy" } : {}),
+    };
+    console.log(man);
+
+    // 12.------ 深度克隆对象
+    const deepClone = (obj) => {
+        let clone = obj;
+        if (obj && typeof obj === "object") {
+            clone = new obj.constructor();
+            Object.getOwnPropertyNames(obj).forEach(
+                (prop) => (clone[prop] = deepClone(obj[prop]))
+            );
+        }
+        return clone;
+    };
 </script>

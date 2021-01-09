@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<script>
+/* 
+ * Set 
+1.实例方法
+add(value)：新增，相当于 array里的push
+delete(value)：存在即删除集合中value
+has(value)：判断集合中是否存在 value
+clear()：清空集合
+
+2.遍历方法（遍历顺序为插入顺序）
+keys()：返回一个包含集合中所有键的迭代器
+values()：返回一个包含集合中所有值得迭代器
+entries()：返回一个包含Set对象中所有元素得键值对迭代器
+forEach(callbackFn, thisArg)：用于对集合成员执行callbackFn操作，如果提供了 thisArg 参数，回调中的this会是这个参数，没有返回值
+
+3.Set 可默认遍历，默认迭代器生成函数是 values() 方法
+ Set可以使用 map、filter 方法
+
+4.Set 很容易实现交集（Intersect）、并集（Union）、差集（Difference）
+*/
+let arr = [1,2,3,5,9,8,3,2,1,9];
+set = new Set(arr);
+
+// 序列化
+set1 = [...set];
+set2 = Array.from(set);
+let set3 = new Set([1, 2, 3])
+console.log(set, set3);
+// 交集
+let intersect = new Set([...set].filter(value => set3.has(value)))
+// 并集
+let union = new Set([...set, ...set3])
+// 差集
+let difference = new Set([...set].filter(value => !set3.has(value)))
+ 
+console.log(intersect)	// Set {2, 3}
+console.log(union)		// Set {1, 2, 3, 4}
+console.log(difference)	// Set {1}
+
+
+</script>

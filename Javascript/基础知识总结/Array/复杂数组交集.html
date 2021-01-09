@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<script>
+let localBackNode = [];
+let backNodes = ['1658749023', '1658749025', '1658749028', '1658749029'];
+let processDefNodes = [
+    {
+        "tpNodeId": 1658749023,
+        "tpId": 10524,
+        "tpName": "农夫建单",
+        "optState": null,
+        "nodeName": "待浇筑确认",
+        "nodeDescribe": null,
+        "tpOpen": 0,
+        "createId": -1,
+        "createPeopleName": "真",
+        "createTime": null,
+        "tpDelete": 1,
+        "executeState": "3",
+        "lastNode": null,
+        "nodeId": "1658749023",
+        "nodeType": 2,
+        "nodeCode": "-5"
+    },
+    {
+        "tpNodeId": 1658749024,
+        "tpId": 10524,
+        "tpName": "农夫建单",
+        "optState": null,
+        "nodeName": "浇筑确认",
+        "nodeDescribe": null,
+        "tpOpen": 0,
+        "createId": -1,
+        "createPeopleName": "真",
+        "createTime": null,
+        "tpDelete": 1,
+        "executeState": "3",
+        "lastNode": null,
+        "nodeId": "1658749024",
+        "nodeType": 1,
+        "nodeCode": "-4"
+    },
+    {
+        "tpNodeId": 1658749025,
+        "tpId": 10524,
+        "tpName": "农夫建单",
+        "optState": null,
+        "nodeName": "浇筑中",
+        "nodeDescribe": null,
+        "tpOpen": 0,
+        "createId": -1,
+        "createPeopleName": "真",
+        "createTime": null,
+        "tpDelete": 1,
+        "executeState": "3",
+        "lastNode": null,
+        "nodeId": "1658749025",
+        "nodeType": 1,
+        "nodeCode": "-3"
+    },
+    {
+        "tpNodeId": 1658749026,
+        "tpId": 10524,
+        "tpName": "农夫建单",
+        "optState": null,
+        "nodeName": "晾干中",
+        "nodeDescribe": null,
+        "tpOpen": 0,
+        "createId": -1,
+        "createPeopleName": "真",
+        "createTime": null,
+        "tpDelete": 1,
+        "executeState": "3",
+        "lastNode": null,
+        "nodeId": "1658749026",
+        "nodeType": 1,
+        "nodeCode": "-2"
+    },
+    {
+        "tpNodeId": 1658749027,
+        "tpId": 10524,
+        "tpName": "农夫建单",
+        "optState": null,
+        "nodeName": "可发货确认",
+        "nodeDescribe": null,
+        "tpOpen": 0,
+        "createId": -1,
+        "createPeopleName": "真",
+        "createTime": null,
+        "tpDelete": 1,
+        "executeState": "3",
+        "lastNode": null,
+        "nodeId": "1658749027",
+        "nodeType": 2,
+        "nodeCode": "1"
+    }
+]
+backNodes.forEach(node => {
+    let cache = processDefNodes.filter(defNode => defNode.tpNodeId === node);
+    if (cache.length) { localBackNode.push(...cache); }
+})
+/* 
+find()： 传入一个函数，满足条件，返回元素，否则为undefined
+findIndex()：传入一个函数，满足条件， 返回索引，否则为-1
+indexOf： 传入元素，返回索引，否则-1
+includes： 传入元素，返回true/false
+*/
+let filterfind = processDefNodes.filter(defNode => !!backNodes.find(node => +node === defNode.tpNodeId));
+let filterfindIndex = processDefNodes.filter(defNode => backNodes.findIndex(node => +node === defNode.tpNodeId) > -1);
+let filterindexOf = processDefNodes.filter(defNode => backNodes.indexOf(defNode.tpNodeId+'') > -1);
+let filterincludes = processDefNodes.filter(defNode => backNodes.includes(defNode.tpNodeId+''));
+// console.info(localBackNode)
+// console.info('%o', localBackNode)
+console.info('%o', filterfind)
+console.info('%o', filterfindIndex)
+console.info('%o', filterindexOf)
+console.info(filterincludes)
+</script>

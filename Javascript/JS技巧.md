@@ -63,3 +63,15 @@ new URLSearchParams() 的用法与 new URL().searchParams相同
 ```html
 <a href="javascript:;" id="a" style="pointer-events:none;">禁用(是否alert)</a>
 ```
+
+## 7.------ 取值
+```javascript
+/*
+ * || 取值 0, '', null, undefined
+ * ?? 取值 null，undefined
+ */
+console.log(0 || 'not value');
+console.log(0 ?? 'not null or undefined');
+console.log('' || 'not value');
+console.log('' ?? 'not null or undefined');
+```

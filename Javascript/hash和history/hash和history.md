@@ -93,7 +93,9 @@ window.addEventListener('replaceState', this.refresh, false);
 
 pushState 和 replaceState 两个方法跟 location.href 和 location.replace 两个方法有什么区别呢？应用的场景有哪些呢？
 
-1. location.href 和 location.replace 切换时要向服务器发送请求，而 pushState 和 replaceState 仅修改 url，除非主动发起请求 **（比如刷新页面调用的是history的replaceState）**；
+1. location.href 和 location.replace 切换时要向服务器发送请求，而 pushState 和 replaceState 仅修改 url，除非主动发起请求;
+  **（比如刷新页面调用的是history的replaceState）**
+  **（点击页面的路径跳转非hash调用的是pushState）**
 2. 仅切换 url 而不发送请求的特性，可以在前端渲染中使用，例如首页是服务端渲染，二级页面采用前端渲染；
 3. 可以添加路由切换的动画；
 4. 在浏览器中使用类似抖音的这种场景时，用户滑动切换视频时，可以静默修改对应的 URL，当用户刷新页面时，还能停留在当前视频。

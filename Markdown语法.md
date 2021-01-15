@@ -16,7 +16,45 @@
 我展示的是二级标题
 -----------------
 
+## 缩进和换行
+缩进：`&nbsp;&ensp;&emsp;`
+
+1. 半角的空格：
+`&ensp; 或 &#8194;`
+2. 全角的空格：
+`&emsp; 或 &#8195;`
+3. 不断行的空格：
+`&nbsp; 或 &#160;`
+
+换行：`<br>`
+
+## font
+<font face="黑体">黑体</font>
+
+<font face="微软雅黑">微软雅黑</font>
+
+<font face="STCAIYUN">华为彩云</font>
+
+<font color=#ff2222 size=7 face="黑体">最大号红色字体</font>
+
+<font color=#00ffff size=7>#00ffff颜色</font>
+
+<font color=gray size=7>gray颜色</font>
+
+<table><tr><td bgcolor=orange> 背景色是 1 orange</td></tr></table>
+
+<table><tr><td bgcolor= BlueViolet > 背景色2 BlueViolet </td></tr></table>
+
+<table><tr><td bgcolor=#7FFFD4>这里的背景色是：Aquamarine，  十六进制颜色值：#7FFFD4， rgb(127, 255, 212)</td></tr></table>
+
 ## 给文字添加颜色
+$\color{#4285f4}{G}
+\color{#ea4335}{o}
+\color{#fbbc05}{o}
+\color{#4285f4}{g}
+\color{#34a853}{l}
+\color{#ea4335}{e}$
+
 $\color{#FF0000}{红}$ $\color{#FF7D00}{橙}$ $\color{#fff03d}{黄}$ $\color{#00FF00}{绿}$  $\color{#0000FF}{蓝}$ $\color{#00FFFF}{靛}$ $\color{#FF00FF}{紫}$
 
 $\color{#FF0000}{红-f00}$ 
@@ -34,8 +72,8 @@ Markdown<sup>注释</sup><sub>下标</sub>
 Markdown
 
 ## 表格
-|  表头   | 表头  |  表头  |
-|  ----  | ----  | ----  |
+|  表头右对齐   | 表头左对齐  |  表头居中显示 |
+|  ----:  | :----  | :----:  |
 | 单元格  | 单元格 |  单元格 |
 | 单元格  | 单元格 |  单元格 |
 
@@ -54,6 +92,39 @@ Markdown[^FOOTER]
 [^FOOTER]:不常用的展示
 
 ## 流程图
+### 图形样式
+|表述|	说明	|含义|
+|--|--|-|
+|id[文字]|矩形结点	|表示过程，及整个过程的一个环节|
+|id(文字)|圆角矩形节点	|表示开始和结束|
+|id((文字))	|圆形节点	|表示连接，为避免流程交叉，可将流程切开成对|
+|id{文字}	|菱形节点	|表示判断、决策|
+|id>文字]	|右向旗帜状结点|
+```mermaid
+graph TB
+A[方形]
+B(圆角矩形)
+C((圆形节点))
+D{菱形}
+E>右向旗帜]
+```
+### 链接符号
+```mermaid
+graph TB
+A1-->B1
+A2---B2
+A3--爱你-->B3
+A3--你---B3
+A4-.-B4
+A5-.->B5
+A6==>B6
+A6===B7
+A8==爱你===B8
+A9==爱你==>B9
+
+
+```
+
 1. 横向流程图源码格式：
 ```mermaid
 graph LR

@@ -8,8 +8,9 @@ function* helloDriver() {
 let driver = helloDriver();
 
 console.log(typeof helloDriver);
-console.log(driver.next());
-console.log(driver.next());
-console.log(driver.next());
-console.log(driver.next());
+// console.log(JSON.stringify(driver.next(), null, 4));
+console.log(driver.next());     // {value: "hello", done: false}
+console.log(driver.next());     // {value: "Driver", done: false}
+console.log(driver.next());     // {value: "good!", done: true}
+console.log(driver.next());     // {value: undefined, done: true}
 </script>

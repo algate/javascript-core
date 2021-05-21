@@ -75,3 +75,22 @@ console.log(0 ?? 'not null or undefined');
 console.log('' || 'not value');
 console.log('' ?? 'not null or undefined');
 ```
+
+## 8.------ input的浏览器自动填充行为
+```javascript
+<input type="text" autocomplete="off"/>
+
+// 这样就好使了，别逗了，兄嘚！elementUI表单组件会教你好好做人，到浏览器里自己试试！！！
+// autocomplete 除了 `on、off` 属性值外，
+// 还有 `name、email、username、new-password、current-password、street-address` 等值
+```
+简单说明下：
++ name和username会自动填充浏览器存储的用户名信息
++ email会自动填充浏览器存储的邮箱后缀的信息
++ street-address会自动填充浏览器存储的地址类信息
+- **current-password和new-password倒是不会自动填充浏览器保存的信息**
+
+so，方法就是设置autocomplete属性值为current-password和new-password即可解决
+
+既然这样，那我给它设置个“text”不是更方便。so，大家可以去试试，完美。
+

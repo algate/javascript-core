@@ -76,7 +76,122 @@ console.log('' || 'not value');
 console.log('' ?? 'not null or undefined');
 ```
 
-## 8.------ input的浏览器自动填充行为
+## 8.------ 可选链
+```javascript
+    obj = {
+        name: "core",
+        content: {
+            title: "JSJQ",
+            data: [
+                {
+                    id: Math.ceil(Math.random() * 10000),
+                    name: "darwin",
+                },
+            ],
+        },
+    };
+    console.log(obj?.name || "not value");
+    console.log(obj?.content?.data[0]?.name || "not value");
+    console.log(obj?.content?.data?.[0]?.name || "not value");
+    console.log(obj.constructor());
+```
+## 9.------ 类型检查小工具
+```javascript
+    const isOfType = (() => {
+        // create a plain object with no prototype
+        const type = Object.create(null);
+
+        // check for null type
+        type.null = (x) => x === null;
+        // check for undefined type
+        type.undefined = (x) => x === undefined;
+        // check for nil type. Either null or undefined
+        type.nil = (x) => type.null(x) || type.undefined(x);
+        // check for strings and string literal type. e.g: 's', "s", `str`, new String()
+        type.string = (x) =>
+            !type.nil(x) && (typeof x === "string" || x instanceof String);
+        // check for number or number literal type. e.g: 12, 30.5, new Number()
+        type.number = (x) =>
+            !type.nil(x) && // NaN & Infinity have typeof "number" and this excludes that
+            ((!isNaN(x) && isFinite(x) && typeof x === "number") ||
+                x instanceof Number);
+        // check for boolean or boolean literal type. e.g: true, false, new Boolean()
+        type.boolean = (x) =>
+            !type.nil(x) && (typeof x === "boolean" || x instanceof Boolean);
+        // check for array type
+        type.array = (x) => !type.nil(x) && Array.isArray(x);
+        // check for object or object literal type. e.g: {}, new Object(), Object.create(null)
+        type.object = (x) => ({}.toString.call(x) === "[object Object]");
+        // check for provided type instance
+        type.type = (x, X) => !type.nil(x) && x instanceof X;
+        // check for set type
+        type.set = (x) => type.type(x, Set);
+        // check for map type
+        type.map = (x) => type.type(x, Map);
+        // check for date type
+        type.date = (x) => type.type(x, Date);
+        return type;
+    })();
+    console.log(isOfType.nil(null));
+```
+
+## 10.------ 顺序执行 promise
+```javascript
+    const asyncSequentializer = (() => {
+        const toPromise = (x) => {
+            if (x instanceof Promise) {
+                // if promise just return it
+                return x;
+            }
+            if (typeof x === "function") {
+                // if function is not async this will turn its result into a promise
+                // if it is async this will await for the result
+                return (async () => await x())();
+            }
+            return Promise.resolve(x);
+        };
+        return (list) => {
+            const results = [];
+            return (
+                list
+                    .reduce((lastPromise, currentPromise) => {
+                        return lastPromise.then((res) => {
+                            results.push(res); // collect the results
+                            return toPromise(currentPromise);
+                        });
+                    }, toPromise(list.shift()))
+                    // collect the final result and return the array of results as resolved promise
+                    .then((res) => Promise.resolve([...results, res]))
+            );
+        };
+    })();
+```
+
+## 11.------ 条件对象键
+```javascript
+    let condition = true;
+    man = {
+        name: "manoeasy",
+        ...(condition === true ? { title: "manoeasy" } : {}),
+    };
+    console.log(man);
+```
+
+## 12.------ 深度克隆对象
+```javascript
+    const deepClone = (obj) => {
+        let clone = obj;
+        if (obj && typeof obj === "object") {
+            clone = new obj.constructor();
+            Object.getOwnPropertyNames(obj).forEach(
+                (prop) => (clone[prop] = deepClone(obj[prop]))
+            );
+        }
+        return clone;
+    };
+```
+
+## 13.------ input的浏览器自动填充行为
 ```javascript
 <input type="text" autocomplete="off"/>
 

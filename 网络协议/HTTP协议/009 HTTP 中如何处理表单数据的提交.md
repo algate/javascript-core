@@ -1,4 +1,4 @@
-# 009 HTTP 中如何处理表单数据的提交
+## 009 HTTP 中如何处理表单数据的提交
 
 在 http 中，有两种主要的表单提交的方式，体现在两种不同的Content-Type取值:
 
@@ -7,7 +7,7 @@
 
 由于表单提交一般是POST请求，很少考虑GET，因此这里我们将默认提交的数据放在请求体中。
 
-## application/x-www-form-urlencoded
+### application/x-www-form-urlencoded
 
 对于application/x-www-form-urlencoded格式的表单内容，有以下特点:
 
@@ -20,7 +20,7 @@
 "a%3D1%26b%3D2"
 ```
 
-## multipart/form-data
+### multipart/form-data
 
 对于multipart/form-data而言:
 
@@ -40,7 +40,7 @@ data2
 ----WebkitFormBoundaryRRJKeWfHPGrS4LKe--
 ```
 
-## 小结
+### 小结
 值得一提的是，multipart/form-data 格式最大的特点在于:每一个表单元素都是独立的资源表述。另外，你可能在写业务的过程中，并没有注意到其中还有boundary的存在，如果你打开抓包工具，确实可以看到不同的表单元素被拆分开了，之所以在平时感觉不到，是以为浏览器和 HTTP 给你封装了这一系列操作。
 
 而且，在实际的场景中，对于图片等文件的上传，基本采用multipart/form-data而不用application/x-www-form-urlencoded，因为没有必要做 URL 编码，带来巨大耗时的同时也占用了更多的空间。

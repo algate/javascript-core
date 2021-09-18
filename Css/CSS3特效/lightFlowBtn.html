@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #555;
+}
+a {
+  width: 400px;
+  height: 100px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 200%;
+  line-height: 100px;
+  text-align: center;
+  font-size: 24px;
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 10px;
+  z-index: 1;
+}
+a::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  right: -5px;
+  top: -5px;
+  bottom: -5px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+  filter: blur(20px);
+  /* backdrop-filter: blur(20px); */
+  /* blur - 高斯模糊 */
+  z-index: -1;
+}
+a:hover::before {
+  animation: sun 8s infinite;
+}
+a:hover {
+  animation: sun 8s infinite;
+}
+
+@keyframes sun {
+  100% {
+    background-position:-400% 0;
+  }
+}
+</style>
+</head>
+<body>
+  <a href="javascript:void(0);">流光按钮 button</a>
+</body>
+</html>

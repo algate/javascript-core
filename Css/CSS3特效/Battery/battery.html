@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+.box {
+  width: 600px;
+  height: 100vh;
+  background: #000;
+  margin: 0 auto;
+}
+.number {
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  line-height: 200px;
+  color: #fff;
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  z-index: 1;
+  margin-left: -100px;
+}
+.contrast {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  position: relative;
+  filter: contrast(15);
+  animation: hueRotate 5s linear infinite;
+}
+
+@keyframes hueRotate {
+  0% {
+    filter: contrast(15) hue-rotate(0deg);
+  }
+  100% {
+    filter: contrast(15) hue-rotate(360deg)
+  }
+}
+
+.circle {
+  width: 300px;
+  height: 300px;
+  background: #000;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -150px;
+  filter: blur(8px);
+  animation: circleRotate 5s linear infinite;
+}
+.circle::before {
+  content: "";
+  width: 200px;
+  height: 200px;
+  background: #00ff6f;
+  /* background: greenyellow; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 42% 38% 62% 49% / 45%;
+}
+.circle::after {
+  content: "";
+  width: 176px;
+  height: 176px;
+  background: #000;
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@keyframes circleRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.bubble-home {
+  width: 150px;
+  height: 50px;
+  background: #00ff6f;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -75px;
+  border-radius: 150px 150px 0 0;
+  filter: blur(8px);
+}
+
+.bubble {
+    background: #00ff6f;
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
+    border-radius: 100px 100px 0 0;
+    filter: blur(5px);
+    animation: moveUp 5s ease-in-out infinite;
+}
+.bubble:nth-child(1) {
+    width: 20px;
+    height: 20px;
+    left: 50%;
+    animation-duration: 4s;
+    animation-delay: 2s;
+}
+
+.bubble:nth-child(2) {
+    width: 22px;
+    height: 22px;
+    left: 54%;
+    animation-duration: 4.2s;
+    animation-delay: 4s;
+}
+
+.bubble:nth-child(3) {
+    width: 24px;
+    height: 24px;
+    left: 45%;
+    animation-duration: 3s;
+    animation-delay: 1s;
+}
+
+.bubble:nth-child(4) {
+    width: 20px;
+    height: 22px;
+    left: 54%;
+    animation-duration: 5s;
+    animation-delay: 0s;
+}
+
+.bubble:nth-child(5) {
+    width: 22px;
+    height: 22px;
+    left: 52%;
+    animation-duration: 3.5s;
+    animation-delay: 5s;
+}
+
+.bubble:nth-child(6) {
+    width: 20px;
+    height: 20px;
+    left: 50%;
+    animation-duration: 4.7s;
+    animation-delay: 1.2s;
+}
+
+.bubble:nth-child(7) {
+    width: 22px;
+    height: 22px;
+    left: 54%;
+    animation-duration: 2.5s;
+    animation-delay: 3.5s;
+}
+
+.bubble:nth-child(8) {
+    width: 24px;
+    height: 24px;
+    left: 51%;
+    animation-duration: 5.6s;
+    animation-delay: 4.2s;
+}
+
+.bubble:nth-child(9) {
+    width: 26px;
+    height: 26px;
+    left: 42%;
+    animation-duration: 5.2s;
+    animation-delay: 4s;
+}
+
+.bubble:nth-child(10) {
+    width: 26px;
+    height: 22px;
+    left: 54%;
+    animation-duration: 3.8s;
+    animation-delay: 4.3s;
+}
+
+.bubble:nth-child(11) {
+    width: 22px;
+    height: 22px;
+    left: 42%;
+    animation-duration: 4.2s;
+    animation-delay: 0.3s;
+}
+
+.bubble:nth-child(12) {
+    width: 24px;
+    height: 24px;
+    left: 46%;
+    animation-duration: 4.6s;
+    animation-delay: 2.0s;
+}
+
+.bubble:nth-child(13) {
+    width: 22px;
+    height: 22px;
+    left: 48%;
+    animation-duration: 3.8s;
+    animation-delay: 3.2s;
+}
+
+.bubble:nth-child(14) {
+    width: 26px;
+    height: 22px;
+    left: 55%;
+    animation-duration: 5.2s;
+    animation-delay: 2.9s;
+}
+
+.bubble:nth-child(15) {
+    width: 26px;
+    height: 22px;
+    left: 52%;
+    animation-duration: 4.9s;
+    animation-delay: 4.2s;
+}
+
+@keyframes moveUp {
+    0% {
+        bottom: 0;
+    }
+
+    100% {
+        bottom: calc(100% - 265px);
+    }
+}
+</style>
+</head>
+<body>
+  <div class="box">
+    <div class="number">95.3%</div>
+    <div class="contrast">
+      <div class="bubble-home"></div>
+      <div class="circle"></div>
+
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+      <span class="bubble"></span>
+    </div>
+  </div>
+</body>
+</html>

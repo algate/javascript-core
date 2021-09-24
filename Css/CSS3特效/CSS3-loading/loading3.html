@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    background: #000;
+  }
+  .loading {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    border-radius: 50%;
+    background: linear-gradient(45deg, transparent, transparent, #a7de2f);
+    animation: animate 2s linear infinite;
+  }
+  @keyframes animate {
+    0% {
+      transform: rotate(0deg);
+      filter: hue-rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+      filter: hue-rotate(360deg);
+    }
+  }
+  .loading::before {
+    content: '';
+    position: absolute;
+    z-index: 10;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    background: #000;
+    /* 纯色黑色才有效果，如果改成彩虹色你试试效果，也是垃圾的一批 */
+    z-index: 2;
+    border-radius: 50%;
+  }
+  .loading::after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, transparent, transparent, #a7de2f);
+    filter: blur(30px);
+  }
+</style>
+</head>
+<body>
+  <div class="loading">
+
+  </div>
+</body>
+</html>

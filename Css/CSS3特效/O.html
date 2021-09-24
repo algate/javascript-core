@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HarmonyOS - ⭕️ - Animation</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    html, body { height: 100% }
+    body {
+      background: black;
+    }
+    .outWrap{
+      position: fixed;
+      display: flex;
+      top: 50%;
+      left: 30%;
+      transform: translate(-50%, -50%);
+      animation: moveFiexd 4s forwards;
+    }
+    .font{
+      height: 150px;
+      color: white;
+      font-size: 104px;
+      line-height: 150px;
+      opacity: 0;
+      animation: transparency 4s forwards
+    }
+    .back{
+      height: 150px;
+      color: white;
+      font-size: 131px;
+      line-height: 177px;
+      opacity: 0;
+      animation: transparency 4s forwards
+    }
+    .wrap{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .wrapOver {
+      position: relative;
+      width: 100px;
+      height: 50px;
+      overflow: hidden
+    }
+
+    .circle1 {
+      position: absolute;
+      box-sizing: border-box;
+      width: 100px;
+      height: 100px;
+      border: 15px solid white;
+      border-radius: 50%;
+      transform: translateY(100%);
+      filter:blur(2px);
+      animation: myMoveTop 2s forwards
+    }
+    .circle2 {
+      position: absolute;
+      box-sizing: border-box;
+      width: 100px;
+      height: 100px;
+      border: 15px solid white;
+      border-radius: 50%;
+      transform: translateY(-150%);
+      filter:blur(2px);
+      animation: myMoveBottom 2s forwards
+    }
+    .bottomSliver{
+      width: 0px;
+      height: 5px;
+      background:#00a1d6 ;
+      margin-top: 5px;
+      animation: myMoveSliver 4s forwards
+    }
+    @keyframes  transparency {
+      50% { opacity: 0;}
+      100% { opacity: 1;}
+    }
+    @keyframes myMoveSliver {
+      50% { width: 0px;}
+      100% { width: 50px;}
+    }
+    @keyframes myMoveBottom {
+      90% {filter:blur(2px); }
+      100% { transform: translateY(-50%);filter:blur(0px);}
+    }
+
+    @keyframes myMoveTop {
+      90% {filter:blur(2px); }
+      100% { transform: none;filter:blur(0px); }
+    }
+    @keyframes moveFiexd {
+      50% {
+        left:30%;
+      }
+      100%  {
+        left:50%;
+      }
+    }
+
+
+  </style>
+</head>
+<body>
+  <p style="color:darkcyan">
+    1. 如果想要循环动画，forwards 改为 infinite ；<br/>
+    2. 如果不改变时间你会发现，⭕️ 无限循环就有点诡异： SO - 改变所有时间为4s；<br/>
+    3. 但是你会发现 ⭕️ 相对应的时间变长了，那就改变 ⭕️ 动画的进度：2s之后结束（别的字出现的时候）0 - 50%「范围内进行动画操作」- 100%「保持50%的状态」；<br/>
+    4. 至此，循环动画制作完毕；
+  </p>
+  <div class="outWrap">
+    <div class="font">Harmony</div>
+        <div class="wrap">
+          <div class="wrapOver">
+            <div class="circle1"></div>
+          </div>
+          <div class="wrapOver">
+            <div class="circle2"></div>
+          </div>
+          <div class="bottomSliver"></div>
+        </div>
+    <div class="back">S</div>        
+  </div>
+
+</body>
+</html>

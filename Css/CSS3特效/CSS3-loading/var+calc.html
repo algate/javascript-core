@@ -36,7 +36,7 @@ section {
 .loading .blocks {
   position: absolute;
   width: 8px;
-  height:25px;
+  height: 25px;
   border-radius: 4px;
   background: #050505;
   left: 50%;
@@ -48,16 +48,16 @@ section {
 }
 @keyframes animate {
   0%, 50% {
-    background: #050505;
-    box-shadow: none;
-  }
-  50.1%, 100% {
     background-color: salmon;
     box-shadow:  0 0 5px salmon,
     0 0 15px salmon,
     0 0 30px salmon,
     0 0 60px salmon,
-    0 0px 90px salmon;
+    0 0 90px salmon;
+  }
+  50.1%, 100% {
+    background: #050505;
+    box-shadow: none;
   }
 }
 h3 {

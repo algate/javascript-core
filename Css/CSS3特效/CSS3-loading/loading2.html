@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #34495e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: fantasy;
+  font-weight: 1000;
+  letter-spacing: 2px;
+}
+.loading {
+  width: 200px;
+  height: 200px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border-top: 10px solid #e74c3c;
+  position: relative;
+  animation: rotate 2s linear infinite;
+  box-shadow:  0 -5px 5px #e74c3c,
+    0 -20px 60px #e74c3c;
+}
+.loading::before,
+.loading::after {
+  content: '';
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 0;
+  top: -10px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  /* background: chocolate; */
+}
+.loading::before {
+  border-top: 10px solid #e67e22;
+  transform: rotate(120deg);
+  box-shadow:  0 -5px 5px #e67e22,
+    0 -20px 60px #e67e22;
+}
+.loading::after {
+  border-top: 10px solid #3498db;
+  transform: rotate(240deg);
+  box-shadow:  0 -5px 5px #3498db,
+    0 -20px 60px #3498db;
+}
+.loading span {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  line-height: 200px;
+  text-align: center;
+  font-size: 30px;
+  color: greenyellow;
+  /* text-shadow: 0 0 5px currentColor, 0 0 10px currentColor; */
+  /* transform: translate(-50%, -50%); */
+  /* 此处设置transform会导致 动画失效 */
+  animation: _rotate 2s linear infinite;
+}
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes _rotate {
+  to {
+    transform: rotate(-360deg);
+  }
+  /* 30% {
+    color: #e74c3c;
+  }
+  60% {
+    color: #e67e22;
+  }
+  100% {
+    color: #3498db;
+  } */
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+</style>
+</head>
+<body>
+  <div class="loading">
+    <span>Loading</span>
+  </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style>
+*{
+  font-family: '微软雅黑', sans-serif;
+  box-sizing: border-box;
+}
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  min-height: 100vh;
+}
+
+.container{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .box{
+  position: relative;
+  width: 300px;
+  height: 400px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-reflect: below 15px linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.2));
+  margin: 0 30px;
+  /* border: 4px solid; */
+  /* filter: url(#wavy); */
+}
+
+.container .box:hover{
+  background: #fff;
+  color: #000;
+}
+
+.container .box::before{
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: -10px;
+  width: 100%;
+  height: 100%;
+  border:4px solid #fff;
+  background: #000;
+  filter: url(#wavy);
+}
+.container .box:hover:before{
+  background: #fff;
+  transition: 0.5s;
+}
+
+.container .box .content{
+  position: absolute;
+  padding: 20px;
+  text-align: center;
+  transition: 0.5s;
+}
+
+svg{
+  width: 0;
+  height: 0;
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="box">
+      <div class="content">
+        <h2>Water Wave Div</h2>
+        <p>
+          挫折之花，绽放于与命运的抗衡。司马迁因秉笔直书，“不溢美，不隐恶”，而遭受腐刑，然而他在狱中却坚强的与命运作斗争，面对挫折，他选择了勇敢；面对挫折，他选择了发愤；面对挫折，他选择了秉笔直书。终于，他“着成信史照尘寰”，留下了千古美名！让挫折之花绽放了两千年！
+        </p>
+      </div>
+    </div>
+    <div class="box">
+      <div class="content">
+        <h2>Water Wave Div</h2>
+        <p>
+          挫折之花，绽放于与命运的抗衡。司马迁因秉笔直书，“不溢美，不隐恶”，而遭受腐刑，然而他在狱中却坚强的与命运作斗争，面对挫折，他选择了勇敢；面对挫折，他选择了发愤；面对挫折，他选择了秉笔直书。终于，他“着成信史照尘寰”，留下了千古美名！让挫折之花绽放了两千年！
+        </p>
+      </div>
+    </div>
+    <div class="box">
+      <div class="content">
+        <h2>Water Wave Div</h2>
+        <p>
+          挫折之花，绽放于与命运的抗衡。司马迁因秉笔直书，“不溢美，不隐恶”，而遭受腐刑，然而他在狱中却坚强的与命运作斗争，面对挫折，他选择了勇敢；面对挫折，他选择了发愤；面对挫折，他选择了秉笔直书。终于，他“着成信史照尘寰”，留下了千古美名！让挫折之花绽放了两千年！
+        </p>
+      </div>
+    </div>
+  </div>
+  <svg>
+    <filter id="wavy">
+      <feTurbulence x="0" y="0" baseFrequency="0.02" numOctaves="5" seed="2">
+        <animate attributeName="baseFrequency" dur="60s" values="0.02;0.05;0.02" repeatCount="indefinite"></animate>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" scale="30"></feDisplacementMap>
+    </filter>
+  </svg>
+</body>
+</html>

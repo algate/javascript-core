@@ -41,7 +41,7 @@ a1 = new Array(5); // new Array(5) 生成的数组是从来没有被赋过值的
 // console.table(a2);
 b1 = new Array(5).fill();
 // b2 - object数组；b3 - string数组
-b2 = b1.map((item) => ({ name: "b2" })); // ==> new Array(5).fill({]})
+b2 = b1.map((item) => ({ name: "b2" })); // ==> new Array(5).fill({})
 b3 = b1.map((item) => ""); // ==> new Array(5).fill('')
 // console.info(b1);
 console.info(b2);
@@ -209,3 +209,10 @@ so，方法就是设置autocomplete属性值为current-password和new-password�
 
 既然这样，那我给它设置个“text”不是更方便。so，大家可以去试试，完美。
 
+## 14.------- 获取数组的最后一项的值
+```js
+Array.prototype.at(-1)
+```
+at() 方法接收一个整数值并返回该索引的项目，允许正数和负数。负整数从数组中的最后一个项目开始倒数。
+
+>方括号符号没有问题。例如，array[0]将返回第一个项目。然而，对于后面的项目，不要使用array.length，例如，对于最后一个项目，可以调用array.at(-1)。

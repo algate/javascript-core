@@ -29,3 +29,6 @@ a {
   color: var(--theme-color);
 }
 ```
+
+### pointer-event:none;
+>元素不会成为鼠标事件的target
